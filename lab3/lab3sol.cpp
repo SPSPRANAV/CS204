@@ -1,12 +1,14 @@
 #include<iostream>
 #include<string>
-#include<cmath>
 using namespace std;
+//Creating a node for creation of Stack using Linked List
 struct node
 {
   char data;
   struct node* ptr;
 };
+//Creating a class name Linked_List which contains functions named push,pop(which has inbuilt top function in it),isEmpty
+//Also has Check function which checks the correctness of the expression entered
 class Linked_List
 {
 public:
@@ -15,6 +17,7 @@ public:
   {
     head=NULL;
   }
+ //PUSH FUNCTION WHICH INTAKES A char variable x and returns nothing
   void push(char x)
   {
     struct node* entry=new node;
@@ -29,13 +32,13 @@ public:
       {
         next->ptr=entry;
         entry->ptr=NULL;
-        //free(next);
         break;
       }
       else next=next->ptr;
   }
 
   }
+   //POP FUNCTION WHICH INTAKES nothing and returns the character which was popped out
   char pop()
   { char x;
     struct node* next;
@@ -43,8 +46,6 @@ public:
     if(head==NULL) return 'E';
     if(head->ptr==NULL)
     {  x=head->data;
-    //  prev=NULL;
-  //  delete(next);//free(head);
       head=NULL;return x;}
       next=head->ptr;
       prev=head;
@@ -52,9 +53,6 @@ public:
     {
       if(next->ptr==NULL)
       {  x=next->data;
-      //  prev=NULL;
-      //  delete(next);
-    //    delete(prev);
     prev->ptr=NULL;
       break;
       }
@@ -66,12 +64,14 @@ public:
     }
     return x;
   }
+   //isEmpty FUNCTION WHICH INTAKES nothing and returns 1 if the stack is empty and returns 0 otherwise
   int isEmpty()
   {
     int a=0;
     if(head==NULL) a=1;
     return a;
   }
+   //CHECK FUNCTION WHICH INTAKES A string input p and returns whether the expression is legitimate or not
   bool Check(string p)
   {
 
@@ -116,17 +116,15 @@ public:
         if(t=='<') continue;
         else return false;break;
       }
-
-      //else return false;
     }
     if(isEmpty()==1) return true;
     else return false;
   }
 };
-
+//MAIN FUNCTION
 int main()
 { int T;
-  //Linked_List l;
+ //Inputting the no.of test cases
  cin>>T;
  while(T--)
 {  string p;

@@ -1,26 +1,29 @@
 #include<iostream>
 #include<cmath>
 using namespace std;
+//Creating a structure named point so that the x-coordinate and y-coordinate are together
 struct point
 {
-  int a;
-  int b;
+  int a;//X-Coordinate
+  int b;//Y-Coordinate
 };
+//Creating a struct named node for creation of a linked list
 struct node
 {
   struct point pt;
   struct node* ptr;
 };
+//Creating a class named Linked_List from implementing Linked List
 class Linked_List
 {
-
-
 public:
     struct node* head;
   Linked_List()
   {
     head=NULL;
   }
+  //This function adds a  point containing ‘x’ as x-coordinate and ‘y’  as y-coordinate 
+  // at the start of the linked list
   void AddFirst(int x,int y)
   {
     struct point P;
@@ -28,13 +31,15 @@ public:
     struct node* next =new node;
     struct node* tmp;
     next->pt=P;
-    tmp=head;//tmp->pt=head->pt;
-    head=next;//head->pt=next->pt;
-    next->ptr=tmp;//next->pt=tmp->pt;
-  //  cout<<P.a<<P.b;
+    tmp=head;
+    head=next;
+    next->ptr=tmp;
   }
-  int DelFirst()
-  { if(head==NULL) return -1;
+// This function deletes the first element in the linked list.
+// If it is not in the list or list is empty, print -1
+  void DelFirst()
+  { int c=-1;
+    if(head==NULL) cout<<c<<endl;
     else
     {
       struct node* tmp;
@@ -42,26 +47,26 @@ public:
       head=tmp;
       free(tmp);
       delete(tmp);
-      return 0;
     }
   }
-  int Del(int x,int y)
+//   This function deletes the node with point containing ‘a’ as x-coordinate and ‘b’ as y-coordinate.
+// If it is not in the list or list is empty,  print -1
+  void Del(int x,int y)
   {
     struct node* next;
     struct node* prev;
-    if(head==NULL){return -1;}
+    int count=-1;
+    if(head==NULL){count==-1;}
     else{next=head;
     	prev=NULL;
     while(next!=NULL)
     {
-
-
     			if( (next->pt.a==x)&&(next->pt.b==y)&&prev!=NULL )
     			{
-
     				prev->ptr=next->ptr
-    		;return 0;
+    		;
     				free(next);delete(next);
+            count++;
 
     				break;
     			}
@@ -72,17 +77,17 @@ public:
     				head=tmp;
     				free(tmp);
     				delete(tmp);
+            count++;
             break;
     			}
     			else{
-
     				prev=next;
     				next=next->ptr;}
-
     }}
 
-
+if(count==-1)cout<<count<<endl;
   }
+ //This function finds the distance of a point p from ORIGIN
 float  Distance(struct point p)
   {
     int x,y;
@@ -91,17 +96,40 @@ float  Distance(struct point p)
     float d=sqrt(x*x+y*y);
     return d;
   }
-  int Search(int x,int y)
+ //  This function gives all the points that are present at atmost ‘d’ distance (Euclidean)
+// from  the origin.
+// If such points exist, print the number of such points.
+// Else print  -1 
+int Search(float d)
+{ int x,y,count=0;
+  struct node* next;
+  if(head==NULL){cout<<"No Linked List";}
+  else
+  {next=head;
+  while(next!=NULL)
+  {
+  x=next->pt.a;y=next->pt.b;
+  if(  Distance(next->pt)<=d){
+count++;
+  next=next->ptr;
+  }
+else{next=next->ptr;}
+
+}}
+if(count==0)count=-1;
+return count;
+}
+//  This function prints True
+// if there exists a point with ‘a’ as x-coordinate and ‘b’ as y-coordinate in the linked list.
+// Else it prints False
+ bool Search(int x,int y)
   { int count=0;
     struct node* next;
     ;
-  //struct node* prev;
   if(head==NULL){return -1;}
 next=head;
-//  prev=NULL;
   while(next!=NULL)
   {
-  /*  cout<<x<<'\t'<<next->pt.a<<'\t';*/
   if( (next->pt.a==x)&&(next->pt.b==y) )
       {
           count=count+1;
@@ -110,13 +138,13 @@ next=head;
       }
         else{  next=next->ptr;}
 }
-return count;}
-
+if(count==0)return false;
+else return true;}
+//This function prints the length of the linked list
   int Length()
   {
     int count=0;
       struct node* next;
-    //  struct node* prev;
           if(head==NULL){return 0;}
       next=head;
       while(next!=NULL)
@@ -127,32 +155,13 @@ next=next->ptr;
      }
     return count;
   }
-void Search(float d)
-{ int x,y,count=0;
-  struct node* next;
-//  struct node* prev;
-  if(head==NULL){cout<<"No Linked List";}
-  else
-  {next=head;
-  //prev=head;
-  while(next!=NULL)
-  {
-  x=next->pt.a;y=next->pt.b;
-  if(  Distance(next->pt)<=d){ //return prev->pt;}
-
-cout<<x<<","<<y<<"\n";
-  next=next->ptr;
-  //prev=prev->ptr;
-
-  }
-else{next=next->ptr;}
-
-}}
-}};
+};
+//MAIN FUNCTION
 int main()
-{ //struct node* head=NULL;
+{
   int T;
   Linked_List list;
+  //INPUTS THE NUMBER OF TEST CASES TO BE VERIFIED
   cin>>T;
   while(T--)
   { int f;
@@ -164,28 +173,28 @@ int main()
     }
     if(f==2)
     {
-  /*  cout<<*/list.DelFirst();
+  list.DelFirst();
     }
     if(f==3)
     { int p,q;
       cin>>p>>q;
-    /*cout<<*/
     list.Del(p,q);
     }
     if(f==4)
     { int e;
       cin>>e;
-      list.Search(e);
+      cout<<list.Search(e)<<endl;
     }
     if(f==5)
     {
       int p,q;
         cin>>p>>q;
-        cout<<list.Search(p,q);
+        if(list.Search(p,q)==true)cout<<"True"<<endl;
+        if(list.Search(p,q)==false)cout<<"False"<<endl;
     }
     if(f==6)
     {
-      cout<<list.Length();
+      cout<<list.Length()<<endl;
     }
   }
 return 0;

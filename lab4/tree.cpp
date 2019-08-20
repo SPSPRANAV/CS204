@@ -1,13 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
 struct etree
 {
     string value;
     etree* left, *right;
 };
-
+//This is the function for getting preference order of operators
 int prec(string c)
 {
     if(c == "^")
@@ -19,7 +18,7 @@ int prec(string c)
     else
     return -1;
 }
-
+//This is the function to convert the given infix to postfix form
 vector<string> infixToPostfix(vector<string> s)
 {
     std::stack<string> st;
@@ -78,6 +77,7 @@ vector<string> infixToPostfix(vector<string> s)
     return ns;
 
 }
+//This is the function to check whether the string element is an operator or not operator
 bool isOperator(string c)
 {
     if (c == "+" || c == "-" ||

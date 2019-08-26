@@ -7,7 +7,7 @@ struct etree
     etree* left, *right;
 };
 //This is the function for getting preference order of operators
-int prec(string c)
+int pref(string c)
 {
     if(c == "^")
     return 3;
@@ -56,7 +56,7 @@ vector<string> infixToPostfix(vector<string> s)
 
         //If an operator is scanned
         else{
-            while(st.top() != "N" && prec(s[i]) <= prec(st.top()))
+            while(st.top() != "N" && pref(s[i]) <= pref(st.top()))
             {
                 string c = st.top();
                 st.pop();

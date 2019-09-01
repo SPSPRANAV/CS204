@@ -150,7 +150,7 @@ bool isOperatorc(char c)
 }
 bool isunary(string p,int i)
 {
-	if(i==0||p[i+1]==41||isOperatorc(p[i-1])||p[i-1] == 61||p[i-1]==40)
+	if((i==0)||(p[i+1]==41)||(isOperatorc(p[i-1]))||(p[i-1] == 61)||(p[i-1]==40))
 		return true;
 	return false;
 }
@@ -246,21 +246,20 @@ string conversion(node arr[],string s)
   while(i<s.length())
   {
 
-      if ((s[i]=='+')||(s[i]=='-')||(s[i]=='*')||(s[i]=='/')||(s[i]=='^')
+      if ((s[i]=='+')||(s[i]=='-')||(s[i]=='*')||(s[i]=='/')||(s[i]=='^')||(s[i]=='(')||(s[i]==')')
       ||(s[i]=='0')||(s[i]=='1')||(s[i]=='2')||(s[i]=='3')||(s[i]=='4')||(s[i]=='5')||(s[i]=='6')||(s[i]=='7')||(s[i]=='8')||(s[i]=='9'))
       {i++;}
       else{string tmp=getString(s[i]);
       int j=i+1;
       while(j<l)
       {
-        if((s[j]!='+')&&(s[j]!='-')&&(s[j]!='*')&&(s[j]!='/')&&(s[j]!='^')
+        if((s[j]!='+')&&(s[j]!='-')&&(s[j]!='*')&&(s[j]!='/')&&(s[j]!='^')&&(s[i]!='(')&&(s[i]!=')')
       &&(s[j]!='0')&&(s[j]!='1')&&(s[j]!='2')&&(s[j]!='3')&&(s[j]!='4')&&(s[j]!='5')&&(s[j]!='6')&&(s[j]!='7')&&(s[j]!='8')&&(s[j]!='9'))
       {tmp=tmp+getString(s[j]);j++;}
       else{break;}
       }
       if(search(arr,tmp)!="Not Found")
       {
-        //cout<<"i is:"<<i<<endl;
         if(i>0){str=s.substr(0,i)+search(arr,tmp);
         s=s.substr(0,i)+search(arr,tmp)+s.substr(j,s.length());
       }
@@ -270,7 +269,7 @@ string conversion(node arr[],string s)
         i=str.length();
       }
 
-    else if((search(arr,tmp)=="Not Found")&&(s[i]!='+')&&(s[i]!='-')&&(s[i]!='*')&&(s[i]!='/')&&(s[i]!='^')
+    else if((search(arr,tmp)=="Not Found")&&(s[i]!='+')&&(s[i]!='-')&&(s[i]!='*')&&(s[i]!='/')&&(s[i]!='^') &&(s[i]!='(')&&(s[i]!=')')
     &&(s[i]!='0')&&(s[i]!='1')&&(s[i]!='2')&&(s[i]!='3')&&(s[i]!='4')&&(s[i]!='5')&&(s[i]!='6')&&(s[i]!='7')&&(s[i]!='8')&&(s[i]!='9')){s="Cannot be evaluated";break;}
   }
   }
@@ -338,7 +337,7 @@ int main()
   if(count!=0)
   { if(e==1)cout<<"CANNOT BE EVALUATED"<<endl;
     else {node * test=insertnode(arr[z],lhs,expvalue(rhs));}
-    }
+  }
   else
   {
     str=conversion(arr[z],str);
@@ -346,6 +345,5 @@ int main()
   if(e==1)cout<<"CANNOT BE EVALUATED"<<endl;
   else{  cout<<expvalue(str)<<endl;}
   }
-}
-z++;}
+}z++;}
 return 0;}

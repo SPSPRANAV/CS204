@@ -1,30 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
-int cnum(string X,string Y)
+int mycompare(string X,string Y)
 {
-	string XY=X.append(Y);
-	string YX=Y.append(X);
-	return XY.compare(YX)>0 ? 1:0;
+	string A=X.append(Y);
+	string B=Y.append(X);
+	if(A.compare(B)>0) return 1;
+	else return 0;
 }
 int main()
 {
-int t;
+int T;
 vector<string> out;
-string s;
-cin>>t;
-	for(int i=0;i<t;i++)
- 		{
-  			int r;
-  			cin>>r;
-  			for(int j=0;j<r;j++)
-			{
-				cin>>s;
-				out.push_back(s);
-			}
-			sort(out.begin(),out.end(),cnum);
-			for(i=0;i<out.size();i++)
-			{
-				cout<<out[i];
-			}
+cin>>T;
+while(T--)
+ {
+  int c;
+  cin>>c;
+  string s;
+  while(c--)
+{	
+	cin>>s;
+	out.push_back(s);
+}
+sort(out.begin(),out.end(),mycompare);
+for(int i=0;i<out.size();i++)
+{
+	cout<<out[i];
+}
       out.clear();
  		}
+}

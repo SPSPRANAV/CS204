@@ -91,7 +91,7 @@ int main()
     cin>>x>>y;
     d[i]=x*x+y*y;
     }
-    cout<<sqrt(blumselection(d,0,n-1,(n+1)/2));
+    cout<<sqrt(blumselection(d,0,n-1,(n+1)/2))<<endl;
   }
   return 0;
 }
